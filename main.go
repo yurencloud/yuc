@@ -10,55 +10,21 @@ import (
 	"fmt"
 	"bufio"
 	"io"
+	"path/filepath"
+	"strings"
 )
 
 const VERSION = "1.0.1"
 
+func getCurrentDirectory() string {
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return strings.Replace(dir, "\\", "/", -1)
+}
+
 func main() {
-	//isVersion := flag.Bool("v", false, "version")
-	//
-	//init := flag.Bool("init", false, "create a new web project")
-
-
-	// 命令类型
-	//isRegister := flag.Bool("register", false, "register command")
-	//isLogin := flag.Bool("login", false, "login command")
-	//isReset := flag.Bool("reset", false, "reset password command")
-	//
-	//// 注册/登录用户
-	//username := flag.String("u", "", "register by username")
-	//password := flag.String("p", "", "your password")
-	//
-	//// 创建命令
-	//cmd := flag.String("c", "", "save your command prompt to web")
-	//comment := flag.String("m", "", "comment your command prompt")
-	//
-	//// 删除指定id的命令
-	//id := flag.Int("d", 0, "delete cmd by id")
-
-	//flag.Parse()
-	//
-	//
-	//
-	//if *isVersion {
-	//	color.Green("yuc version "+VERSION)
-	//}
-	//
-	//if *init {
-	//	color.Green("Init yugo project now ...")
-	//	_, err := exec_shell("git clone https://github.com/yurencloud/yugo-template.git")
-	//	if err!=nil {
-	//		color.Red("clone project fail")
-	//		panic(err)
-	//	}
-	//	exec_shell("cp -rf yugo-template/* ./")
-	//	exec_shell("rm -rf yugo-template")
-	//	exec_shell("rm -rf ./.git")
-	//	result, _ := exec_shell("ls -R |awk '{print i$0}' i=`pwd`'/'")
-	//	color.Blue(result)
-	//	color.Green("Init successful!")
-	//}
-
 	app := cli.NewApp()
 
 	app.Name = "yuc"
@@ -78,6 +44,11 @@ func main() {
 				exec_shell("cp -rf yugo-template/* ./")
 				exec_shell("rm -rf yugo-template")
 				exec_shell("rm -rf ./.git")
+
+				path, _ := exec_shell("pwd")
+				dirname := path[strings.LastIndex(path, "/")+1:]
+				log.Print(dirname)
+				exec_shell("sed -i 's/yugo-template/"+dirname+"/g' router.go")
 				result, _ := exec_shell("ls -R |awk '{print i$0}' i=`pwd`'/'")
 				color.Blue(result)
 				color.Green("Init successful!")
