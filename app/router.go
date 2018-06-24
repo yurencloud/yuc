@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gorilla/mux"
-	"yuc/controller"
-	"yuc/middleware"
+	"yugo-template/controller"
+	"yugo-template/middleware"
 )
 
 func InitRouter(router *mux.Router) {

@@ -1,4 +1,36 @@
-package main
+package template
+
+import (
+	"yuc/util"
+	"strings"
+)
+
+var main = `package main
+
+func main()  {
+	Run()
+}`
+
+var router = `package main
+
+import (
+	"github.com/gorilla/mux"
+	"yugo-template/controller"
+	"yugo-template/middleware"
+)
+
+func InitRouter(router *mux.Router) {
+
+	router.HandleFunc("/", controller.Index)
+	router.HandleFunc("/login", controller.Login)
+
+	home := router.PathPrefix("/home").Subrouter()
+	home.HandleFunc("", controller.Home)
+	home.Use(middleware.Auth)
+}
+`
+
+var run = `package main
 
 import (
 	"github.com/gorilla/mux"
@@ -49,3 +81,18 @@ func Run() {
 		http.ListenAndServe(":"+configMap["port"], router)
 	}
 }
+`
+
+func GenerateApp() {
+	util.GenerateFile("./main.go", main)
+
+
+	router := strings.Replace(router, "yugo-template", util.GetCurrentDirectoryName(), -1)
+	util.GenerateFile("./router.go", router)
+
+	util.GenerateFile("./run.go", run)
+}
+
+
+
+
