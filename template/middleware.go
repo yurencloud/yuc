@@ -25,7 +25,7 @@ func Auth(next http.Handler) http.Handler {
 
 func GenerateMiddleware()  {
 	//以读写方式打开文件，如果不存在，则创建
-	util.GenerateFile("./middleware/auth.conf", middleware)
+	util.GenerateFile("./middleware/auth.go", middleware)
 }
 
 
