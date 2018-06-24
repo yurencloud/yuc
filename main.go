@@ -4,7 +4,7 @@ import (
 	"os"
 	"github.com/urfave/cli"
 	"github.com/fatih/color"
-	"yuc/util"
+	"github.com/yurencloud/yuc/util"
 )
 
 const VERSION = "1.0.1"

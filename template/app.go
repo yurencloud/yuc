@@ -1,8 +1,8 @@
 package template
 
 import (
-	"yuc/util"
 	"strings"
+	"github.com/yurencloud/yuc/util"
 )
 
 var main = `package main

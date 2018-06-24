@@ -1,8 +1,8 @@
 package main
 
 import (
-	"yuc/template"
-	"yuc/util"
+	"github.com/yurencloud/yuc/util"
+	"github.com/yurencloud/yuc/template"
 )
 
 func CreateNewProject()  {

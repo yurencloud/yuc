@@ -1,7 +1,7 @@
 package template
 
 import (
-	"yuc/util"
+	"github.com/yurencloud/yuc/util"
 )
 
 var appconf = `app.name = yugo
