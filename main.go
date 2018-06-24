@@ -5,6 +5,7 @@ import (
 	"github.com/urfave/cli"
 	"github.com/fatih/color"
 	"github.com/yurencloud/yuc/util"
+	"runtime"
 )
 
 const VERSION = "1.0.1"
@@ -22,8 +23,10 @@ func main() {
 			Action:  func(c *cli.Context) error {
 				color.Green("Init yugo project now ...")
 				CreateNewProject()
-				result, _ := util.ExecShell("ls -R |awk '{print i$0}' i=`pwd`'/'")
-				color.Blue(result)
+				if runtime.GOOS != "windows" {
+					result, _ := util.ExecShell("ls -R |awk '{print i$0}' i=`pwd`'/'")
+					color.Blue(result)
+				}
 				color.Green("Init successful!")
 				return nil
 			},
