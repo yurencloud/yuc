@@ -34,12 +34,12 @@ var run = `package main
 
 import (
 	"github.com/gorilla/mux"
-	"yugo/config"
+	"github.com/yurencloud/yugo/config"
 	"strings"
 	"net/http"
 	"github.com/gorilla/csrf"
-	_ "yugo/log"
-	"github.com/sirupsen/logrus"
+	_ "github.com/yurencloud/yugo/log"
+	log "github.com/sirupsen/logrus"
 	"strconv"
 )
 
@@ -65,7 +65,7 @@ func Run() {
 
 	appName := configMap["app.name"]
 
-	logrus.Info("app: " + appName + ", started at port " + configMap["port"])
+	log.Info("app: " + appName + ", started at port " + configMap["port"])
 
 	if configMap["csrf.enabled"] == "true" {
 		maxAge, _ := strconv.Atoi(configMap["csrf.max.age"])

@@ -8,7 +8,7 @@ var middleware = `package middleware
 
 import (
 	"net/http"
-	"yugo/session"
+	"github.com/yurencloud/yugo/session"
 )
 
 func Auth(next http.Handler) http.Handler {
